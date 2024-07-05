@@ -4,7 +4,7 @@ project(demo)
 set(CMAKE_CXX_FLAGS  "-std=c++11")   
 # 将当前目录下所有源文件放到变量SRC中
 aux_source_directory(./src/ src)
-
+#add_compile_options()
 # 遍历所有源文件
 foreach(src ${src})
     # 获取文件名

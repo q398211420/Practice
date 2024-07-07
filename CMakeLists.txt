@@ -12,3 +12,4 @@ foreach(src ${src})
     # 生成可执行文件
     add_executable(${target} ${src})
 endforeach()
+add_subdirectory(multifiletest)

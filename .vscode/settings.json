@@ -54,7 +54,13 @@
         "typeinfo": "cpp",
         "sstream": "cpp",
         "fstream": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "any": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "optional": "cpp",
+        "span": "cpp",
+        "variant": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [
@@ -77,5 +83,9 @@
                 }
             }
         ]
-    }
+    },
+    "gtest-adapter.debugConfig": [
+        "(gdb) 启动"
+    ],
+    "gtest-adapter.supportLocation": true
 }

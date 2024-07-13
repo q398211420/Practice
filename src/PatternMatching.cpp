@@ -1,10 +1,11 @@
 #include <cassert>
 #include <cstring>
 #include <iostream>
+#include <gtest/gtest.h>
 
 
-constexpr int SUBMAXSIZE = 100;
-constexpr int MAXSIZE    = 1000;
+static constexpr int SUBMAXSIZE = 100;
+static constexpr int  MAXSIZE    = 1000;
 
 int FindStr(const std::string& str1, const std::string& str2)
 {
@@ -98,7 +99,8 @@ void NextVal(std::string str, int nextval[])
     }
 }
 
-int main(int argc, char* argv[])
+
+TEST(PatternMatch, KMP)
 {
     std::string s1, s2;
     // std::getline(std::cin, s1);
@@ -114,17 +116,15 @@ int main(int argc, char* argv[])
     int len = s2.length();
     int next[SUBMAXSIZE];
     Next(s2, next);
-    //PrintNext(next, len);
+    // PrintNext(next, len);
 
     int nextVal[SUBMAXSIZE];
     NextVal(s2, nextVal);
-    //PrintNext(nextVal, len);
+    // PrintNext(nextVal, len);
     auto pos1 = KMP(s1, s2, next);
     auto pos2 = KMP(s1, s2, nextVal);
     auto pos3 = s1.find(s2);
     std::cout << pos1 << pos2 << pos3 << std::endl;
-
-    return 0;
+    EXPECT_EQ(pos1, pos2);
+    EXPECT_EQ(pos1, pos3);
 }
-
-  

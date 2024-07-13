@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.26)
 set(CMAKE_BUILD_TYPE Debug)
 project(demo)
-set(CMAKE_CXX_FLAGS  "-std=c++11")   
-
+enable_testing()
 set(GTEST_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/gtest)
 set(GTEST_LIB_DIRS ${CMAKE_SOURCE_DIR}/lib)
-
+include(GoogleTest)
 include_directories(${GTEST_INCLUDE_DIRS})
-link_libraries(${GTEST_LIB_DIRS})
+link_directories(${GTEST_LIB_DIRS})
 
 
 # 将当前目录下所有源文件放到变量SRC中
@@ -19,5 +18,8 @@ foreach(src ${src})
     get_filename_component(target ${src} NAME_WE)
     # 生成可执行文件
     add_executable(${target} ${src})
+    target_link_libraries(${target} PRIVATE gtest gtest_main pthread)
+    gtest_discover_tests(${target})
 endforeach()
 add_subdirectory(multifiletest)
+

@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 3.26)
 set(CMAKE_BUILD_TYPE Debug)
 project(demo)
 set(CMAKE_CXX_FLAGS  "-std=c++11")   
+
+set(GTEST_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/gtest)
+set(GTEST_LIB_DIRS ${CMAKE_SOURCE_DIR}/lib)
+
+include_directories(${GTEST_INCLUDE_DIRS})
+link_libraries(${GTEST_LIB_DIRS})
+
+
 # 将当前目录下所有源文件放到变量SRC中
 aux_source_directory(./src/ src)
 #add_compile_options()

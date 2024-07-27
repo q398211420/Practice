@@ -1,0 +1,66 @@
+核心语言概念
+same_as[1](C++20)	指定一个类型与另一类型相同
+
+derived_from[2](C++20)	指定一个类型派生自另一类型
+
+convertible_to[3](C++20)	指定一个类型能隐式转换成另一类型
+
+common_reference_with[4](C++20)	指定两个类型共有一个公共引用类型
+
+common_with[5](C++20)	指定两个类型共有一个公共类型
+
+integral[6](C++20)	指定类型为整数类型
+
+signed_integral[7](C++20)	指定类型为有符号的整型类型
+
+unsigned_integral[8](C++20)	指定类型为无符号的整型类型
+
+floating_point[9](C++20)	指定类型为浮点类型
+
+assignable_from[10](C++20)	指定一个类型能从另一类型赋值
+
+swappableswappable_with[11](C++20)	指定一个类型能进行交换，或两个类型能彼此交换
+
+destructible[12](C++20)	指定能销毁该类型的对象
+
+constructible_from[13](C++20)	指定该类型的变量能从一组实参类型进行构造，或绑定到一组实参类型
+
+default_initializable[14](C++20)	指定能默认构造一个类型的对象
+
+move_constructible[15](C++20)	指定能移动构造一个类型的对象
+
+copy_constructible[16](C++20)	指定能复制构造和移动构造一个类型的对象
+
+
+比较概念
+boolean-testable[17](C++20)	指定能用于布尔语境的类型
+(仅用于阐释的概念)
+equality_comparableequality_comparable_with[18](C++20)	指定运算符 「==」 为等价关系
+
+totally_orderedtotally_ordered_with[19](C++20)	指定比较运算符在该类型上产生全序
+
+定义于头文件 <compare>	
+three_way_comparablethree_way_comparable_with[20](C++20)	指定运算符 「<=>」 在给定类型上产生一致的结果
+
+
+对象概念
+movable[21](C++20)	指定能移动及交换一个类型的对象
+
+copyable[22](C++20)	指定能复制、移动及交换一个类型的对象
+
+semiregular[23](C++20)	指定能赋值、移动、交换及默认构造一个类型的对象
+
+regular[24](C++20)	指定类型为正则，即它既为 semiregular亦为 [equality_comparable]()
+
+
+可调用概念
+invocableregular_invocable[25](C++20)	指定能以给定的一组实参类型调用的可调用类型
+
+predicate[26](C++20)	指定可调用类型为布尔谓词
+
+relation[27](C++20)	指定可调用类型为二元关系
+
+equivalence_relation[28](C++20)	指定 relation`` 施加等价关系
+
+strict_weak_order[29](C++20)	指定一个 relation`` 所强加的是严格弱序
+

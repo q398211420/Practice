@@ -187,7 +187,9 @@ namespace {
     };
     class D2 : private D1 {
     public:
-        int fcn(int) {}
+        int fcn(int) {
+            return 0;
+        }
         int fcn()
         {
             return 2;

@@ -94,5 +94,13 @@ decltype(e)（其中e的类型为T）的推导规则有5条：
 如果e是一个类型为T的左值，则decltype(e)是T&。cv操作符将被保留。
 如果e是一个类型为T的将亡值，则decltype(e)是T&&。
 除去以上情况，则decltype(e)是T
-————————————————
+11.
+如果要让数组不衰退成指针类型的话，
+现在提倡
+template <typename T>
+void fun( T& x ) { ... } (也能推断出数组大小)
+
+template <typename T, size_t N>
+void fun( T (&x)[N] ) { ... } 
+这种写法在"effective modern c++"中已经提到，是多余的。
 

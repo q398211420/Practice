@@ -8,9 +8,9 @@ public:
 
 class SqList {
 public:
-    static constexpr size_t length{
-        101};  // 使用constexpr修饰的静态变量必须在类内初始化
-    Item r[length];
+    static constexpr size_t LENGTH{
+        10};  // 使用constexpr修饰的静态变量必须在类内初始化
+    Item r[LENGTH];
 };
 
 class imp {
@@ -49,7 +49,7 @@ void imp::QSort(SqList& L, int low, int high)
 
 void imp::QuickSort(SqList& L)
 {
-    QSort(L, 1, L.length);
+    QSort(L, 1, L.LENGTH-1);
 }
 
 int main(int argc, char* argv[])
@@ -58,15 +58,15 @@ int main(int argc, char* argv[])
     std::default_random_engine r;
     r.seed(time(nullptr));
     std::cout << "before quicksort:" << std::endl;
-    for (size_t i = 0; i < L.length; i++) {
+    for (size_t i = 1; i < L.LENGTH; i++) {
         L.r[i].key = r() % 1000;
         std::cout << L.r[i].key << " ";
     }
     std::cout  << std::endl;
     std::cout << "after quicksort:" << std::endl;
     imp::QuickSort(L);
-    for (auto e : L.r) {
-        std::cout << e.key << " ";
+    for (size_t i = 1; i < L.LENGTH; i++) {
+        std::cout << L.r[i].key << " ";
     }
     std::cout << std::endl;
     return 0;

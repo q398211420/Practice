@@ -18,8 +18,8 @@ int FindStr(const std::string& str1, const std::string& str2)
             ++j;
         }
         else {
-            j = 1;
-            i = i - j + 2;
+            j = 0;
+            i = i - j + 1;
         }
     }
     if (j = s2Len) {

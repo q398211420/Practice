@@ -32,7 +32,7 @@ Obj complicated(int n)
 {
     Obj obj1;
     Obj obj2;
-    // 有分支，一般无 NRVO
+    // 有分支，一般无NRVO
     if (n % 2 == 0) {
         return obj1;
     }

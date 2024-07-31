@@ -25,7 +25,8 @@ int main(int argc, char* argv[])
 {
     int                   a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::vector<float>    v{1, 2, 3, 4};
-    std::array<double, 5> r{-1, -2, -3, -4, -5};
+    std::array<double, 5> r
+    {-1, -2, -3, -4, -5};
     fun(a);
     fun(v);
     fun(r);

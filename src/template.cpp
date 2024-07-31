@@ -6,6 +6,8 @@
 // #define S
 #define B
 #ifdef S
+// 适用场景1
+// 对Normal类取类型，得到的是类本身，对Other类取类型，得到的是Other类指针。
 struct Normal
 {
     std::string name;
@@ -31,11 +33,10 @@ struct ObjType<Other>
 {
     using type = Other*;
 };
-// 适用场景1
-// 对Normal类取类型，得到的是类本身，对Other类取类型，得到的是Other类指针。
 #endif
 
 #ifdef B
+// 适用场景2 推断模板类型参数
 struct Normal
 {
     std::string name{"name"};
@@ -70,7 +71,6 @@ void Fun()
     std::cout << typeid(x).name() << std::endl;
 }
 
-// 适用场景2 推断模板类型参数
 #endif
 
 int main(int argc, char* argv[])
@@ -90,15 +90,4 @@ int main(int argc, char* argv[])
     Fun<float>();
 #endif
 
-    // int                        n[5] = {1, 2, 3, 4, 5};
-    // std::ostream_iterator<int> o(std::cout, ",");
-    // std::transform(std::begin(n), std::end(n), o, [](int x) { return ++x; });
-
-    //
-    // Derive d;
-    // Normal *dd = &d;
-    // Normal &ddd = d;
-    // std::cout << typeid(d).name() << std::endl;
-    // std::cout << typeid(dd).name() << std::endl;
-    // std::cout << typeid(ddd).name() << std::endl;
 };

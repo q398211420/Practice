@@ -64,8 +64,3 @@
 int main(int argc, const char** argv) {
     return 0;
 }
-template <typename... Args> void f2(Args... args)
-{
-    auto lm = [&, args...] { return p1(args...); };
-    lm();
-}

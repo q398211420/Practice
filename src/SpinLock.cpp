@@ -55,7 +55,9 @@ void thread2()
 {
     mu.Lock();  // (4)
 }
-
+int main(int argc, const char** argv) {
+    return 0;
+}
 /*
 (1) 处加锁用到的 exchange 是一种 read - modify- write 操作，它将目标值(第一个参数)
 写入原子变量，并返回写入前的值。在这个实现中，锁被占用时flag 为 true。如果锁被占用，(1) 处的 exchange 操作会一直返回true，线程阻塞在循环中，直到锁被释放。

@@ -28,14 +28,14 @@ void Notify()
 // 更通常的写法是
 
 bool is_ready = false;
-std::condition_variable cv;
+std::condition_variable cvv;
 std::mutex mm;
 
 void thread_1()
 {
     std::unique_lock<std::mutex> lock(mm);
     while (!is_ready)
-        cv.wait(lock);
+        cvv.wait(lock);
     // ....
 }
 
@@ -45,7 +45,7 @@ void thread_2()
         std::lock_guard<std::mutex> lock(mm);
         is_ready = true;
     }
-    cv.notify_one();
+    cvv.notify_one();
 }
 /*
 条件变量为什么要搭配锁使用，结合上述例子：

@@ -41,18 +41,27 @@
 
     3.Reader-Writer Problem
         允许多个进程同时读一个共享对象，但不允许一个写进程和其他读进程或者写进程同时访问共享对象
+
+    4.一个更复杂的生产者消费者问题（吃水果问题）
+        桌子上有一个盘子，每次只能放入一个水果。爸爸只放苹果，妈妈只放橘子，儿子专吃橘子，女儿专吃苹果。只有盘子为空时，爸爸或
+        妈妈才能向其中放一个水果；仅当盘子中有需要的水果时，儿子或女儿才可以从盘子中取出。
+    5.吸烟者问题
+        假设一个系统有三个抽烟者进程和一个供应者进程。每个抽烟者不停地卷烟并抽掉它，但要卷起并抽掉一支烟，抽烟者需要有三种材料：烟草，纸，胶水。
+        三个抽烟者中，第一个抽烟者拥有烟草，第二个拥有纸，第三个拥有胶水。供应者进程无限地提供三种材料，供应者每次将两种材料放到桌子上，拥有
+        剩下那种材料的抽烟者卷一根烟并抽掉它，并且给供应者一个信号告诉已完成，此时供应者就会将另外两种材料放到桌上，如此重复（让三个抽烟者轮流的抽烟）。
 */
 #include "Semaphores.h"
 #include <random>
 #include <thread>
 
+
+//   1.The producer-consumer problem
 constexpr int MAX_COUNT = 5;
 std::mutex m;
 RecordSemaphore empty{MAX_COUNT};
 RecordSemaphore full{0};
 char buffer[5] = {'$', '$', '$', '$', '$'};
 int in{0}, out{0};
-//   1.The producer-consumer problem
 void Producer(int i)
 {
     double s = static_cast<double>(std::rand()) / RAND_MAX;
@@ -125,7 +134,7 @@ void TestPhilosopher()
     ，以便让写进程写操作。又因为readcount是一个可被多个读进程访问的临界资源，因此，也应该为它设置一个互斥信号量rmutex。
 */
 // V1版本读进程优先
-// V2版本读写公平法(写进程优先级比V1稍微高)
+// V2版本读写公平法(写进程优先级比V1稍微高，待实现)
 // V3写进程优先 (待实现)
 std::mutex wmutex;
 std::mutex rmutex;
@@ -182,9 +191,67 @@ void TestReaderWriterV1()
 }
 //   3.Reader-Writer Problem
 
+//   4.吃水果问题
+std::mutex plate;
+RecordSemaphore apple{0};
+RecordSemaphore orange{0};
+std::string fruitInPlate;
+void Father()
+{
+    do {
+        plate.lock();
+        fruitInPlate = "apple";
+        std::cout << "Father put an apple in the plate." << std::endl;
+        apple.Signal();
+    } while (1);
+}
+void Mother()
+{
+    do {
+        plate.lock();
+        fruitInPlate = "orange";
+        std::cout << "Mother put an orange in the plate." << std::endl;
+        orange.Signal();
+    } while (1);
+}
+void Son()
+{
+    do {
+        orange.Wait();
+        fruitInPlate = "none";
+        std::cout << "Son take an orange from the plate." << std::endl;
+        plate.unlock();
+    } while (1);
+}
+void Daughter()
+{
+    do {
+        apple.Wait();
+        fruitInPlate = "none";
+        std::cout << "Daughter take an apple from the plate." << std::endl;
+        plate.unlock();
+    } while (1);
+}
+void TestFruit(){
+    std::thread tFather(Father);
+    std::thread tMother(Mother);
+    std::thread tSon(Son);
+    std::thread tDaughter(Daughter);
+    tFather.join();
+    tMother.join();
+    tSon.join();
+    tDaughter.join();
+}
+//   4.吃水果问题
+
+//   5.抽烟者问题
+
+//   5.抽烟者问题
+
 int main(int argc, const char** argv)
 {
     srand(time(0));
+    TestFruit();
 
     return 0;
 }

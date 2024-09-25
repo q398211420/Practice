@@ -246,9 +246,9 @@ void TestFruit()
 
 //   5.抽烟者问题
 int cn = 0;
-std::mutex tobacco;
-std::mutex paper;
-std::mutex glue;
+std::mutex offer1;  // 纸和胶水组合资源
+std::mutex offer2;  // 烟草和胶水组合资源
+std::mutex offer3;  // 纸和烟草组合资源
 std::mutex ps;
 std::mutex sm;
 // 供应者
@@ -258,20 +258,17 @@ void Provider()
         ps.lock();
         switch (cn) {
             case 0: {
-                paper.unlock();
-                glue.unlock();
+                offer1.unlock();
                 std::cout << "Provide paper and glue..." << std::endl;
                 break;
             }
             case 1: {
-                tobacco.unlock();
-                glue.unlock();
+                offer2.unlock();
                 std::cout << "Provide tobacco and glue..." << std::endl;
                 break;
             }
             case 2: {
-                tobacco.unlock();
-                paper.unlock();
+                offer3.unlock();
                 std::cout << "Provide paper and tobacco..." << std::endl;
                 break;
             }
@@ -285,11 +282,8 @@ void Provider()
 void Smoker1()
 {
     do {
-        sm.lock();
-        paper.lock();
-        glue.lock();
+        offer1.lock();
         std::cout << "Smoker1 smoking..." << std::endl;
-        sm.unlock();
         ps.unlock();
     } while (1);
 }
@@ -298,10 +292,8 @@ void Smoker1()
 void Smoker2()
 {
     do {
-        tobacco.lock();
-        glue.lock();
+        offer2.lock();
         std::cout << "Smoker2 smoking..." << std::endl;
-        sm.unlock();
         ps.unlock();
 
     } while (1);
@@ -310,11 +302,8 @@ void Smoker2()
 void Smoker3()
 {
     do {
-        sm.lock();
-        paper.lock();
-        tobacco.lock();
+        offer3.lock();
         std::cout << "Smoker3 smoking..." << std::endl;
-        sm.unlock();
         ps.unlock();
 
     } while (1);
@@ -331,7 +320,6 @@ void TestSmoke()
     threadS3.join();
 }
 //   5.抽烟者问题
-
 
 int main(int argc, const char** argv)
 {

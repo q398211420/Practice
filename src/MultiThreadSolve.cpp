@@ -54,7 +54,6 @@
 #include <random>
 #include <thread>
 
-
 //   1.The producer-consumer problem
 constexpr int MAX_COUNT = 5;
 std::mutex m;
@@ -232,7 +231,8 @@ void Daughter()
         plate.unlock();
     } while (1);
 }
-void TestFruit(){
+void TestFruit()
+{
     std::thread tFather(Father);
     std::thread tMother(Mother);
     std::thread tSon(Son);
@@ -245,13 +245,98 @@ void TestFruit(){
 //   4.吃水果问题
 
 //   5.抽烟者问题
+int cn = 0;
+std::mutex tobacco;
+std::mutex paper;
+std::mutex glue;
+std::mutex ps;
+std::mutex sm;
+// 供应者
+void Provider()
+{
+    do {
+        ps.lock();
+        switch (cn) {
+            case 0: {
+                paper.unlock();
+                glue.unlock();
+                std::cout << "Provide paper and glue..." << std::endl;
+                break;
+            }
+            case 1: {
+                tobacco.unlock();
+                glue.unlock();
+                std::cout << "Provide tobacco and glue..." << std::endl;
+                break;
+            }
+            case 2: {
+                tobacco.unlock();
+                paper.unlock();
+                std::cout << "Provide paper and tobacco..." << std::endl;
+                break;
+            }
+            default: break;
+        }
+        ++cn;
+        cn %= 3;
+    } while (1);
+}
+// 拥有烟草
+void Smoker1()
+{
+    do {
+        sm.lock();
+        paper.lock();
+        glue.lock();
+        std::cout << "Smoker1 smoking..." << std::endl;
+        sm.unlock();
+        ps.unlock();
+    } while (1);
+}
 
+// 拥有纸
+void Smoker2()
+{
+    do {
+        tobacco.lock();
+        glue.lock();
+        std::cout << "Smoker2 smoking..." << std::endl;
+        sm.unlock();
+        ps.unlock();
+
+    } while (1);
+}
+// 拥有胶水
+void Smoker3()
+{
+    do {
+        sm.lock();
+        paper.lock();
+        tobacco.lock();
+        std::cout << "Smoker3 smoking..." << std::endl;
+        sm.unlock();
+        ps.unlock();
+
+    } while (1);
+}
+void TestSmoke()
+{
+    std::thread threadP(Provider);
+    std::thread threadS1(Smoker1);
+    std::thread threadS2(Smoker2);
+    std::thread threadS3(Smoker3);
+    threadP.join();
+    threadS1.join();
+    threadS2.join();
+    threadS3.join();
+}
 //   5.抽烟者问题
+
 
 int main(int argc, const char** argv)
 {
     srand(time(0));
-    TestFruit();
+    TestSmoke();
 
     return 0;
 }

@@ -1,0 +1,14 @@
+需要先安装opencc和Doxygen
+sudo tar -zxvf manpages-zh-1.6.4.0.tar.gz
+mkdir build && cd build/
+cmake ..
+make
+make install # 需要超级用户权限
+
+为了不抵消man，我们新建cman命令作为中文查询
+cd ~
+vi .bash_profile
+
+在.bash_profile中增加:
+alias cman='man -M /usr/local/share/man/zh_CN'
+source .bashrc #更新bash_profile 使其生效

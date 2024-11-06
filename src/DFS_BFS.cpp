@@ -14,7 +14,7 @@
                                            
 */
 namespace Recursive {
-    void DFS(const Graph& G, int v, std::vector<bool>& visited)
+    void DFS(const GraphList& G, int v, std::vector<bool>& visited)
     {
         auto vertex = G.vertices[v];
         std::cout << vertex.data << std::endl;
@@ -27,7 +27,7 @@ namespace Recursive {
             }
         }
     }
-    void DFSTraverse(const Graph& G)
+    void DFSTraverse(const GraphList& G)
     {
         std::cout << "DFSTraverse with recursive:" << std::endl;
 
@@ -45,7 +45,7 @@ namespace NoRecursive {
     //书上是先访问，再把访问后的元素加入队列，队列只起记录顺序的作用，实际在队列外已经访问完成了。
     //此处是把要访问的元素置为true后加入队列，队列里的元素代表要访问的元素，等待访问。
     //不管哪种方法，一定要先设置true再加入队列，不然可能出现同一个顶点被加入两次的情况（由于visited状态未更新）
-    void BFSTraverse(const Graph& G)
+    void BFSTraverse(const GraphList& G)
     {
         std::cout << "BFSTraverse without recursive:" << std::endl;
         std::vector<bool> visited(G.vexnum, false);
@@ -73,7 +73,7 @@ namespace NoRecursive {
     //同BFS,栈里的元素代表要访问的元素，先置为ture再入栈。
     //置为true的元素不代表已经访问完成，只代表元素已经入栈。
     //实际访问完成在出栈时刻。
-    void DFSTraverse(const Graph& G)
+    void DFSTraverse(const GraphList& G)
     {
         std::cout << "DFSTraverse without recursive:" << std::endl;
         std::vector<bool> visited(G.vexnum, false);
@@ -107,9 +107,9 @@ namespace NoRecursive {
 
 }  // namespace NoRecursive
 
-Graph GeneTestGraph()
+GraphList GeneTestGraph()
 {
-    AdjList al;
+    GraphList::AdjList al;
     al[0].data = "v1";
     al[1].data = "v2";
     al[2].data = "v3";
@@ -119,24 +119,24 @@ Graph GeneTestGraph()
     al[6].data = "v7";
     al[7].data = "v8";
 
-    auto a12 = std::make_shared<ArcNode>();
-    auto a13 = std::make_shared<ArcNode>();
-    auto a21 = std::make_shared<ArcNode>();
-    auto a24 = std::make_shared<ArcNode>();
-    auto a25 = std::make_shared<ArcNode>();
-    auto a31 = std::make_shared<ArcNode>();
-    auto a36 = std::make_shared<ArcNode>();
-    auto a37 = std::make_shared<ArcNode>();
-    auto a42 = std::make_shared<ArcNode>();
-    auto a48 = std::make_shared<ArcNode>();
-    auto a52 = std::make_shared<ArcNode>();
-    auto a58 = std::make_shared<ArcNode>();
-    auto a63 = std::make_shared<ArcNode>();
-    auto a67 = std::make_shared<ArcNode>();
-    auto a73 = std::make_shared<ArcNode>();
-    auto a76 = std::make_shared<ArcNode>();
-    auto a84 = std::make_shared<ArcNode>();
-    auto a85 = std::make_shared<ArcNode>();
+    auto a12 = std::make_shared<GraphList::ArcNode>();
+    auto a13 = std::make_shared<GraphList::ArcNode>();
+    auto a21 = std::make_shared<GraphList::ArcNode>();
+    auto a24 = std::make_shared<GraphList::ArcNode>();
+    auto a25 = std::make_shared<GraphList::ArcNode>();
+    auto a31 = std::make_shared<GraphList::ArcNode>();
+    auto a36 = std::make_shared<GraphList::ArcNode>();
+    auto a37 = std::make_shared<GraphList::ArcNode>();
+    auto a42 = std::make_shared<GraphList::ArcNode>();
+    auto a48 = std::make_shared<GraphList::ArcNode>();
+    auto a52 = std::make_shared<GraphList::ArcNode>();
+    auto a58 = std::make_shared<GraphList::ArcNode>();
+    auto a63 = std::make_shared<GraphList::ArcNode>();
+    auto a67 = std::make_shared<GraphList::ArcNode>();
+    auto a73 = std::make_shared<GraphList::ArcNode>();
+    auto a76 = std::make_shared<GraphList::ArcNode>();
+    auto a84 = std::make_shared<GraphList::ArcNode>();
+    auto a85 = std::make_shared<GraphList::ArcNode>();
 
     al[0].firstarc = (a12);
     al[1].firstarc = (a21);
@@ -191,7 +191,7 @@ Graph GeneTestGraph()
     a85->adjvex = 4;
     a85->nextarc = nullptr;
 
-    Graph G;
+    GraphList G;
     G.vertices = (al);
     G.vexnum = 8;
     G.arcnum = 18;

@@ -10,8 +10,19 @@ include(GoogleTest)
 include_directories(${GTEST_INCLUDE_DIRS} ${MY_INCLUDE_DIRS})
 link_directories(${GTEST_LIB_DIRS})
 
-# 将当前目录下所有源文件放到变量SRC中
+
+
+# 将当前目录下所有源文件放到变量src，此后子级不断更新src
 aux_source_directory(./src/ src)
+# 添加子级
+add_subdirectory(src/Algorithms)
+add_subdirectory(src/CppSyntax)
+add_subdirectory(src/DesignPatterns)
+add_subdirectory(src/Interview)
+add_subdirectory(src/MT)
+add_subdirectory(src/Network)
+#message(STATUS "src: ${src}")
+
 #add_compile_options()
 # 遍历所有源文件
 foreach(src ${src})

@@ -65,7 +65,7 @@ void MultiplePack(int weight, int value, int number)  //多重背包模型
         while (k <= number) {
             ZeroOnePack(k * weight, k * value);
             number -= k;
-            k << 1;
+            k <<= 1;
         }
         if (number != 0)
             ZeroOnePack(number * weight, number * value);

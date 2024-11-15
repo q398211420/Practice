@@ -1,2 +1,2 @@
 #include "file.h"
-int A::count = 18;
+int A::count = 18; 

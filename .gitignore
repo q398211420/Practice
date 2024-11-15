@@ -2,3 +2,5 @@ CMakeFiles
 build
 temp
 src/Temp.cpp
+multifiletest/obj
+multifiletest/filetest

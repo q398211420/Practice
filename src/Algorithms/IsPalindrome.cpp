@@ -18,7 +18,7 @@ auto IsPalindrome(int x) -> bool
     // x == reversedHalf / 10: 奇数长度回文
     return x == reversedHalf || x == reversedHalf / 10;
 }
-int main(int argc, const char** argv)
+auto main(int argc, const char** argv) ->int
 {
     if (IsPalindrome(6)) {
         std::cout << "/* message */" << std::endl;

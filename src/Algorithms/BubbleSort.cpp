@@ -1,5 +1,6 @@
 #include <iostream>
 #include "mytool.h"
+#include <gtest/gtest.h>
 void BubbleSort(int a[], size_t len)
 {
     for (size_t i = len - 1; i > 1; i--) {
@@ -11,7 +12,7 @@ void BubbleSort(int a[], size_t len)
     }
 }
 
-int main(int argc, char* argv[])
+TEST(Algorithms, BubbleSort)
 {
     srand(time(nullptr));
     int a[10];
@@ -24,6 +25,5 @@ int main(int argc, char* argv[])
     BubbleSort(a, 10);
     std::cout << " after:";
     MyPrint(a);
-   
-    return 0;
+
 }

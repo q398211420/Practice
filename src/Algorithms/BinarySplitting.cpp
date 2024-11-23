@@ -12,7 +12,8 @@
     6:6
 */
 #include <iostream>
-int main(int argc, const char** argv)
+#include <gtest/gtest.h>
+TEST(Algorithms, BinarySplitting)
 {
     int number;
     while (std::cin >> number) {
@@ -25,5 +26,5 @@ int main(int argc, const char** argv)
         if (number)
             std::cout << number << std::endl;
     }
-    return 0;
+ 
 }

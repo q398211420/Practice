@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <gtest/gtest.h>
 auto IsPalindrome(int x) -> bool
 {
     // 负数或以 0 结尾的非零数不是回文数
@@ -18,10 +18,10 @@ auto IsPalindrome(int x) -> bool
     // x == reversedHalf / 10: 奇数长度回文
     return x == reversedHalf || x == reversedHalf / 10;
 }
-auto main(int argc, const char** argv) ->int
+TEST(Algorithms, IsPalindrome)
 {
     if (IsPalindrome(6)) {
         std::cout << "/* message */" << std::endl;
     }
-    return 0;
+    
 }

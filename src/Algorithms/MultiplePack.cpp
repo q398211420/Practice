@@ -37,6 +37,7 @@ n 表示推车所能程受的最大重量，m 代表超市中的商品种类数�
 */
 
 #include <iostream>
+#include <gtest/gtest.h>
 using namespace std;
 
 const int N = 100005;
@@ -72,7 +73,7 @@ void MultiplePack(int weight, int value, int number)  //多重背包模型
     }
 }
 
-int main()
+TEST(Algorithms, MultiplePack)
 {
     cin >> n >> m;
     for (int i = 1; i <= m; i++)
@@ -80,5 +81,5 @@ int main()
     for (int i = 1; i <= m; i++)
         MultiplePack(w[i], v[i], num[i]);
     cout << dp[n] << endl;
-    return 0;
+    
 }

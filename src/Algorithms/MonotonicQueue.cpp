@@ -1,6 +1,7 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <gtest/gtest.h>
 
 std::vector<int> maxSlidingWindow(const std::vector<int>& nums, int k)
 {
@@ -29,7 +30,7 @@ std::vector<int> maxSlidingWindow(const std::vector<int>& nums, int k)
     return result;
 }
 
-int main()
+TEST(Algorithms, MonotonicQueue)
 {
     std::vector<int> nums = {1, 3, -1, -3, 5, 3, 6, 7};
     int k = 3;
@@ -39,7 +40,6 @@ int main()
         std::cout << max_val << " ";
     }
     std::cout  << std::endl;
-    return 0;
 }
 
 /*

@@ -21,6 +21,7 @@
 3
 */
 #include <iostream>
+#include <gtest/gtest.h>
 using namespace std;
 
 // 方便理解的二维表格形式，行代表物品种类，列代表重量
@@ -71,7 +72,4 @@ void Optimized()
     cout << dp[n] << endl;
 }
 
-int main(int argc, const char** argv)
-{
-    return 0;
-}
+TEST(Algorithms, ZeroOnePack){}

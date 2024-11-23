@@ -77,7 +77,7 @@ void ShortestPath_FLOYD(GraphMatrix G, PathMatrix3D& P, ShortPathTable2D& D)
     }
 }
 
-TEST(ShortestPath, DIJ)
+TEST(Algorithms, ShortestPath_DIJ)
 {
     GraphMatrix G;
     G.vexnum = 6;
@@ -115,7 +115,7 @@ TEST(ShortestPath, DIJ)
         }
     }
 }
-TEST(ShortestPath, FLOYD)
+TEST(Algorithms, ShortestPath_FLOYD)
 {
     GraphMatrix G;
     G.vexnum = 6;

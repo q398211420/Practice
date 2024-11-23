@@ -1,6 +1,7 @@
 // 数据结构P274
 #include <iostream>
 #include <random>
+#include <gtest/gtest.h>
 class Item {
 public:
     int key;
@@ -52,7 +53,7 @@ void imp::QuickSort(SqList& L)
     QSort(L, 1, L.LENGTH-1);
 }
 
-int main(int argc, char* argv[])
+TEST(Algorithms, QuickSort)
 {
     SqList                     L;
     std::default_random_engine r;
@@ -69,5 +70,5 @@ int main(int argc, char* argv[])
         std::cout << L.r[i].key << " ";
     }
     std::cout << std::endl;
-    return 0;
+   
 }

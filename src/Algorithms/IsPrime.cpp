@@ -1,6 +1,7 @@
 #include <cmath>  // 用于sqrt函数
+#include <gtest/gtest.h>
 
-bool isPrime(int n)
+bool IsPrime(int n)
 {
     if (n <= 1)
         return false;  // 0和1不是质数
@@ -14,9 +15,7 @@ bool isPrime(int n)
     }
     return true;
 }
-int main(int argc, const char** argv) {
-    return 0;
-}
+TEST(Algorithms, IsPrime){}
 /*
 关键点解析：
 1.	只检查到 sqrt(n)：

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <map>
+#include <gtest/gtest.h>
 std::map<std::stack<int>*, std::string> g_name;
 void Recursion(int n, std::stack<int>& A, std::stack<int>& B, std::stack<int>& C)
 {
@@ -19,7 +20,7 @@ void Recursion(int n, std::stack<int>& A, std::stack<int>& B, std::stack<int>& C
 
     Recursion(n - 1, B, A, C);
 }
-int main(int argc, const char** argv)
+TEST(Algorithms, TowerOfHanoi)
 {
     std::stack<int> A;
     std::stack<int> B;
@@ -50,5 +51,5 @@ int main(int argc, const char** argv)
         C.pop();
         std::cout << e << " " << std::endl;
     }
-    return 0;
+   
 }

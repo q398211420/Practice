@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DataStructure.h"
+#include <gtest/gtest.h>
 
 /*
                   v1
@@ -200,11 +201,10 @@ GraphList GeneTestGraph()
     return G;
 }
 
-int main(int argc, const char** argv)
+TEST(Algorithms, DFS_BFS)
 {
     auto G = GeneTestGraph();
     //Recursive::DFSTraverse(G);
     //NoRecursive::BFSTraverse(G);
     NoRecursive::DFSTraverse(G);
-    return 0;
 }

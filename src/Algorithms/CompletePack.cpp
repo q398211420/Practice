@@ -24,8 +24,9 @@
 
 // 方便理解的二维表格形式，行代表物品种类，列代表重量
 #include <iostream>
+#include <gtest/gtest.h>
 using namespace std;
-void Unoptimized()
+void CPUnoptimized()
 {
     const int N = 1005;
     const int M = 105;
@@ -51,7 +52,7 @@ void Unoptimized()
 换言之，现在我们不再需要用最里面的那层 k kk 循环来确定某个网格到底拿多少物品才能使得背包总价值最大，而是通过采取和 01 背包问题中相反的更新p[] 
 数组方向来实现。这样一来，我们还顺带解决了时间复杂度过高的问题！
 */
-void Optimized()
+void CPOptimized()
 {
     const int N = 100005;
     const int M = 10005;
@@ -67,6 +68,4 @@ void Optimized()
     cout << dp[n] << endl;
 }
 
-int main(int argc, const char** argv) {
-    return 0;
-}
+TEST(Algorithms, CompletePack){}

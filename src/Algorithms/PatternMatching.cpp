@@ -3,9 +3,8 @@
 #include <iostream>
 #include <gtest/gtest.h>
 
-
 static constexpr int SUBMAXSIZE = 100;
-static constexpr int  MAXSIZE    = 1000;
+static constexpr int MAXSIZE = 1000;
 
 int FindStr(const std::string& str1, const std::string& str2)
 {
@@ -36,17 +35,17 @@ int KMP(const std::string& str1, const std::string& str2, int next[])  //
     int i = 0, j = 0;
     int len1 = str1.length();
     int len2 = str2.length();
-    int pos  = -1;
+    int pos = -1;
     while (i < len1 && j < len2) {
         if (j == -1 || str1[i] == str2[j]) {
             ++i;
             ++j;
         }
-        else{
+        else {
             j = next[j];
         }
     }
-    if(j = len2){
+    if (j = len2) {
         pos = i - j;
     }
     return pos;
@@ -62,7 +61,7 @@ void PrintNext(int next[], int len)
 void Next(std::string str, int next[])
 {
     size_t len = str.length();
-    int    i = 0, j = -1;
+    int i = 0, j = -1;
     next[i] = -1;
     while (i < len - 1) {
         if (j == -1 || str[j] == str[i]) {
@@ -80,7 +79,7 @@ void Next(std::string str, int next[])
 void NextVal(std::string str, int nextval[])
 {
     size_t len = str.length();
-    int    i = 0, j = -1;
+    int i = 0, j = -1;
     nextval[i] = -1;
     while (i < len - 1) {
         if (j == -1 || str[j] == str[i]) {
@@ -99,8 +98,7 @@ void NextVal(std::string str, int nextval[])
     }
 }
 
-
-TEST(PatternMatch, KMP)
+TEST(Algorithms, KMP)
 {
     std::string s1, s2;
     // std::getline(std::cin, s1);

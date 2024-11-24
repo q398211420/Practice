@@ -114,5 +114,8 @@
     "gtest-adapter.debugConfig": [
         "(gdb) 启动"
     ],
-    "gtest-adapter.supportLocation": true
+    "gtest-adapter.supportLocation": true,
+    "C_Cpp.codeAnalysis.exclude": {
+        "include": true
+    }
 }

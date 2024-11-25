@@ -1,0 +1,4 @@
+#ifndef HEADER_QUICK_SORT_H
+#define HEADER_QUICK_SORT_H
+
+#endif

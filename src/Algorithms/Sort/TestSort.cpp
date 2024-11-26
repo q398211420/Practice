@@ -65,6 +65,22 @@ public:
     }
 };
 
+class UseShellSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        ShellSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
+class UseSelectSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        SelectSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
 class SortedArray {
 public:
     SortedArray(std::unique_ptr<SortStrategy> s)
@@ -219,7 +235,7 @@ TEST_F(SortTest, MergeSort)
     auto v = SortTest::GetOriginData();
     SortedArray test(std::make_unique<UseMergeSort>());
     test.SetData(v);
-    
+
     test.Sort();
     EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
 
@@ -241,5 +257,29 @@ TEST_F(SortTest, QuickSort)
     EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
 }
 TEST_F(SortTest, RadixSort) {}
-TEST_F(SortTest, SelectSort) {}
-TEST_F(SortTest, ShellSort) {}
+TEST_F(SortTest, SelectSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseSelectSort>());
+    test.SetData(v);
+
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}
+TEST_F(SortTest, ShellSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseShellSort>());
+    test.SetData(v);
+
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}

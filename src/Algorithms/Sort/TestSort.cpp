@@ -33,6 +33,38 @@ public:
     }
 };
 
+class UseBubbleSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        BubbleSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
+class UseQuickSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        QuickSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
+class UseHeapSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        HeapSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
+class UseMergeSort : public SortStrategy {
+public:
+    void MySort(std::array<int, 1000>& nums, std::function<bool(int, int)> predicate) override
+    {
+        MergeSort(nums.begin(), nums.end(), predicate);
+    }
+};
+
 class SortedArray {
 public:
     SortedArray(std::unique_ptr<SortStrategy> s)
@@ -102,7 +134,7 @@ protected:
             }
             int value;
             int i = 0;
-            while (file>> value) {
+            while (file >> value) {
                 m_originData[i] = value;
                 i++;
             }
@@ -150,17 +182,64 @@ TEST_F(SortTest, BInsertSort)
 
     test.Sort();
     EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
-    
+
     test.SetDescend();
     test.Sort();
     EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
-   
 }
 
-TEST_F(SortTest, BubbleSort) {}
-TEST_F(SortTest, HeapSort) {}
-TEST_F(SortTest, MergeSort) {}
-TEST_F(SortTest, QuickSort) {}
+TEST_F(SortTest, BubbleSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseBubbleSort>());
+    test.SetData(v);
+
+    test.Sort();
+    ASSERT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}
+TEST_F(SortTest, HeapSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseHeapSort>());
+    test.SetData(v);
+
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}
+TEST_F(SortTest, MergeSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseMergeSort>());
+    test.SetData(v);
+    
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}
+TEST_F(SortTest, QuickSort)
+{
+    auto v = SortTest::GetOriginData();
+    SortedArray test(std::make_unique<UseQuickSort>());
+    test.SetData(v);
+
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetAscendData());
+
+    test.SetDescend();
+    test.Sort();
+    EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
+}
 TEST_F(SortTest, RadixSort) {}
 TEST_F(SortTest, SelectSort) {}
 TEST_F(SortTest, ShellSort) {}

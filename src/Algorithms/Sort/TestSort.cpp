@@ -256,7 +256,7 @@ TEST_F(SortTest, QuickSort)
     test.Sort();
     EXPECT_EQ(test.GetData(), SortTest::GetDescendData());
 }
-TEST_F(SortTest, RadixSort) {}
+
 TEST_F(SortTest, SelectSort)
 {
     auto v = SortTest::GetOriginData();

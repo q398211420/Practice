@@ -1,6 +1,6 @@
 #include <cmath>  // 用于sqrt函数
 #include <gtest/gtest.h>
-
+// 判断一个数是不是质数，排除因子2，3后，只需要排除6k+-1;
 bool IsPrime(int n)
 {
     if (n <= 1)

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <array>
 #include <vector>
 #include <memory>
@@ -52,3 +54,9 @@ public:
     int vexnum, arcnum;
 
 };  //图的邻接矩阵表示法
+
+typedef struct AVLNode{
+    int data;
+    int bf; // 结点的平衡因子
+    struct AVLNode *lchild, *rchild;
+}* AVLTree;

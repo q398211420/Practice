@@ -1,93 +1,89 @@
-// 华为typeinfer对复数和实数的随机矩阵特殊处理引发的联想练习
-// 实现一份代码，对三类对象统一处理(normal,A,B)
+// 华为typeinfer引发的联想练习
+// 利用模板实现对复数类和其他类的不同处理
 #include <algorithm>
 #include <iostream>
 #include <iterator>
-// #define S
-#define B
-#ifdef S
-// 适用场景1
-// 对Normal类取类型，得到的是类本身，对Other类取类型，得到的是Other类指针。
-struct Normal
+#include <type_traits>
+#include <complex>
+
+struct MyComplex
 {
-    std::string name;
+    void Print()
+    {
+        std::cout << "I'm Complex" << std::endl;
+    }
 };
 
-struct Other
+struct MyOthers
 {
-    std::string Aname;
+    void Print()
+    {
+        std::cout << "I'm Others" << std::endl;
+    }
 };
 
-struct Derive : public Normal
-{
-};
-
-template <typename T>
-struct ObjType
-{
-    using type = T;
-};
-
-template <>
-struct ObjType<Other>
-{
-    using type = Other*;
-};
-#endif
-
-#ifdef B
-// 适用场景2 推断模板类型参数
-struct Normal
-{
-    std::string name{"name"};
-};
-
-struct Other
-{
-    std::string Oname{"Oname"};
-};
+// 方法一，定义一个TypeInfer
+// 缺点，需要手动写不同复数类型的代码
 
 template <typename T>
 struct TypeInfer
 {
+    using type = MyOthers;
 };
 
 template <>
-struct TypeInfer<int>
+struct TypeInfer<std::complex<int>>
 {
-    using obj = Normal;
+    using type = MyComplex;
 };
 
 template <>
-struct TypeInfer<float>
+struct TypeInfer<std::complex<float>>
 {
-    using obj = Other;
+    using type = MyComplex;
 };
 
 template <typename T>
-void Fun()
+void Fun1()
 {
-    typename TypeInfer<T>::obj x;
-    std::cout << typeid(x).name() << std::endl;
+    typename TypeInfer<T>::type x;
+    x.Print();
 }
 
-#endif
+// 方法2，利用type_traits
+
+// 1
+template <typename T>
+struct IsComplex : public std::false_type
+{
+};
+
+// 2
+template <typename T>
+struct IsComplex<std::complex<T>> : public std::true_type
+{
+};
+// 这是两个不同的类，基类都不一样，不要错误理解成2是1的特化
+
+template <typename T>
+void Fun2(std::enable_if_t<IsComplex<T>::value>* = nullptr)
+{
+    MyComplex x;
+    x.Print();
+}
+
+template <typename T>
+void Fun2(std::enable_if_t<!IsComplex<T>::value>* = nullptr)
+{
+    MyOthers x;
+    x.Print();
+}
 
 int main(int argc, char* argv[])
 {
-#ifdef S
-    ObjType<Normal>::type a;
-    ObjType<Other>::type  b;
-
-    std::cout << typeid(a).name() << std::endl;
-    std::cout << typeid(b).name() << std::endl;
-#endif
-
-#ifdef B
-    Normal a;
-    Other b;
-    Fun<int>();
-    Fun<float>();
-#endif
-
+    Fun1<int>();
+    Fun1<std::complex<int>>();
+    Fun2<int>();
+    Fun2<std::complex<int>>();
+    return 0;
 };

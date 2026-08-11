@@ -114,8 +114,14 @@
     "gtest-adapter.debugConfig": [
         "(gdb) 启动"
     ],
+    "vim.useSystemClipboard": true,
+    "C_Cpp.codeAnalysis.runAutomatically": false,
     "gtest-adapter.supportLocation": true,
     "C_Cpp.codeAnalysis.exclude": {
-        "include": true
+        "include": true,
+        "doc/**": true,
+        "build/**": true,
+        "Python/**": true,
+        "test_db/**": true
     }
 }

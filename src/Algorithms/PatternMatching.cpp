@@ -75,7 +75,9 @@ void Next(std::string str, int next[])
     }
 }
 
-// 对求next数组的修正算法，如果next[i] = T[i]，则next[i] = next[next[i]]
+// 对求next数组的修正算法，如果next[i] = T[i]，则next[i] = next[next[i]].pattern[next[i]] 就是和 pattern[i] 相同的字符，那不是又要失败一次？
+
+// 为了避免这种重复比较，可以对 next[i] 做“修正”
 void NextVal(std::string str, int nextval[])
 {
     size_t len = str.length();

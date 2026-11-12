@@ -1,5 +1,6 @@
 // meyer单例
 #include <iostream>
+#include <gtest/gtest.h>
 
 class Singleton {
   public:
@@ -26,11 +27,9 @@ class Singleton {
     }
 };
 
-int main(int argc, char* argv[])
+TEST(DesignPatterns, Singleton)
 {
     Singleton& s1 = Singleton::GetInstance();
     Singleton& s2 = Singleton::GetInstance();
     s1.use();
-
-    return 0;
 }

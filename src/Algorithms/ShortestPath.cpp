@@ -36,7 +36,7 @@ void ShortestPath_DIJ(GraphMatrix G, int v0, PathMatrix2D& P, ShortPathTable1D& 
             if (!final[w] && !overFlow && newDis < D[w]) {
                 D[w] = min + G.arcs[v][w];
                 memcpy(P[w], P[v], sizeof(bool) * G.vexnum);  // 把v0到w结点的路径更新为v0到v的路径
-                P[w][w] = true;                               // v0到v的路径+v到w
+                P[w][w] = true;                               // 这里没写错，P[i] 是「从起点到 i 的最短路上，哪些点出现过」,这里 P[w][w]被上一行覆盖了为false，需要再加入w
             }
         }
     }
@@ -45,8 +45,8 @@ void ShortestPath_DIJ(GraphMatrix G, int v0, PathMatrix2D& P, ShortPathTable1D& 
 /*每一对顶点之间的最短路径*/
 //可以用n次迪杰斯特拉算法，时间复杂度为O(n^3)
 // 这里用弗洛伊德算法 有点像0-1背包问题的降维使用滚动数组的方式 时间复杂度也为O(n^3)
-// 设求vi 到vj的最短路径，此时已经求得途经点序号，不超过k的最短路径，那么求不超过k+1的最短路径
-// 则最短路径为 (vi 到vk+1) + (vk+1 到 vj) 和 此时的(vi到vj) 两者之间的较小者
+// 设求vi 到vj的最短路径，此时已经求得vi到vj的途经点序号，不超过k的最短路径，那么求不超过k+1的最短路径
+// 则最短路径为 (vi 到vk+1) + (vk+1 到 vj) 和 此时的(vi到vj) 两者之间的较小者，即k+1加入进来以后，新的最短路径要么包含k+1，要么维持原样
 void ShortestPath_FLOYD(GraphMatrix G, PathMatrix3D& P, ShortPathTable2D& D)
 {
     for (size_t v = 0; v < G.vexnum; v++) {
@@ -74,7 +74,7 @@ void ShortestPath_FLOYD(GraphMatrix G, PathMatrix3D& P, ShortPathTable2D& D)
                 }
             }
         }
-    }
+    } //这里实际上用了滚动数组，降维了，k次循环用到的D[v][w]必然是上一次循环已经计算的
 }
 
 TEST(Algorithms, ShortestPath_DIJ)

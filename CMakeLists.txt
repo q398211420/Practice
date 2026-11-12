@@ -16,6 +16,7 @@ aux_source_directory(./src/ src)
 # 添加子级
 add_subdirectory(src/Algorithms)
 add_subdirectory(src/CppSyntax)
+add_subdirectory(src/DataStructure)
 add_subdirectory(src/DesignPatterns)
 add_subdirectory(src/Interview)
 add_subdirectory(src/MT)

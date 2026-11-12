@@ -69,7 +69,7 @@ private:
     std::vector<int> unionSize;
 };
 
-TEST(Algorithms, UnionFind_Find)
+TEST(DataStructure, UnionFind_Find)
 {
     UnionFind uf(10);
 
@@ -78,7 +78,7 @@ TEST(Algorithms, UnionFind_Find)
 
     EXPECT_TRUE(uf.Find(2).value() == uf.Find(0).value());
 }
-TEST(Algorithms, UnionFind_FindRecursive)
+TEST(DataStructure, UnionFind_FindRecursive)
 {
     UnionFind uf(10);
 
@@ -87,7 +87,7 @@ TEST(Algorithms, UnionFind_FindRecursive)
 
     EXPECT_TRUE(uf.FindRecursive(2).value() == uf.FindRecursive(0).value());
 }
-TEST(Algorithms, UnionFind_Unite)
+TEST(DataStructure, UnionFind_Unite)
 {
     UnionFind uf(6);
 
@@ -138,7 +138,7 @@ TEST(Algorithms, UnionFind_Unite)
     EXPECT_TRUE(uf3.IsConnected(0, 2));
     EXPECT_FALSE(uf3.IsConnected(0, 3));
 }
-TEST(Algorithms, UnionFind_IsConnected)
+TEST(DataStructure, UnionFind_IsConnected)
 {
     UnionFind uf(6);
 

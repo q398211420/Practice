@@ -7,7 +7,7 @@
 auto GetPrime(int n) -> int
 {
     int cnt{0};
-    std::vector<bool> isPrime(n, true);
+    std::vector<bool> isPrime(n+1, true);
     for (int i = 2; i <= n; i++) {
         if (isPrime[i]) {
             cnt++;

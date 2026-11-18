@@ -1,10 +1,8 @@
 #pragma once
 
 #include <array>
-#include <vector>
 #include <memory>
-#include <queue>
-#include <stack>
+#include <climits>
 static constexpr int MAX_VERTEX_NUM = 20;
 static constexpr int INFINITY = INT_MAX;
 using InfoType = int;

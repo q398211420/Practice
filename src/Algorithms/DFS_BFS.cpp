@@ -1,7 +1,8 @@
 #include <iostream>
 #include "DataStructure.h"
 #include <gtest/gtest.h>
-
+#include <queue>
+#include <stack>
 /*
                   v1
                  /  \  

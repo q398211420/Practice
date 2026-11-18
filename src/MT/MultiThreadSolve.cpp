@@ -51,7 +51,7 @@
         剩下那种材料的抽烟者卷一根烟并抽掉它，并且给供应者一个信号告诉已完成，此时供应者就会将另外两种材料放到桌上，如此重复（让三个抽烟者轮流的抽烟）。
 */
 #include "Semaphores.h"
-#include <random>
+#include <unistd.h>
 #include <thread>
 
 //   1.The producer-consumer problem

@@ -71,6 +71,9 @@
 */
 
 #include <iostream>
+#include <vector>    
+#include <utility>      
+#include <algorithm>    
 #include <queue>
 
 struct Interviewer
